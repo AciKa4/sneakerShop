@@ -1,0 +1,397 @@
+*{
+  padding: 0px;
+  margin: 0px;
+}
+#hed{
+  background-color:#142236;
+  opacity:0.9;
+}
+.logo a img{
+  width:80px;
+}
+#nav{
+  list-style-type: none;
+  padding-top:20px;
+}
+#nav li {
+  padding-left:50px;
+}
+#nav  li a{
+  text-decoration: none;
+  color:#fff;
+  text-transform:uppercase;
+}
+#banner img{  
+  background-position: center; 
+  width:100%;
+  height:auto;
+}
+
+
+#pic{
+  background-image: url('../img/asics.jpg');
+  min-height:600px;
+  width:100%;
+  background-repeat:no-repeat;
+  background-position: center; 
+}
+#pic1{
+  background-image: url('../img/pumamirage.jpg');
+  min-height:600px;
+  width:100%;
+  background-repeat:no-repeat;
+  background-position: center; 
+}
+#pic2{
+  background-image: url('../img/nikewall.jpg');
+  min-height:600px;
+  width:100%;
+  background-repeat:no-repeat;
+  background-position: center; 
+}
+/*hamburger*/
+.hamb{
+	display:none;
+	font-size:2rem;
+	cursor:pointer;
+  color:#fff;
+}
+.meniResp{
+	display:none !important;
+}
+.meniResp li a{
+  font-size:1.4rem;
+  color:#fff;
+  padding-bottom:2rem;
+}
+.tekst a{
+  text-decoration: none;
+  color:#fff;
+  background-color:#0071E3;
+  padding:5px 10px 5px 10px;
+  margin:0px auto;
+  border-radius:10px;
+}
+.tekst a:hover{
+  text-decoration: none;
+  font-weight: bold;
+  color:#fff;
+}
+
+.tekstnaslov{
+  color:#4d4d4d;
+}
+
+.bg-slika{
+  background-color:#000;
+}
+.picpatike img{
+  width:80%;
+}
+.tekstpatike {
+  text-align:center;
+  color:#fff;
+}
+.tekstpatike a{
+  text-decoration: none;
+  color:#fff;
+}
+.tekstpatike a:hover{
+  text-decoration:none;
+  color:#fff;
+  font-weight:bold;
+}
+
+.tekstpatikewhite a{
+  text-decoration: none;
+  color:#fff;
+}
+.tekstpatikewhite a:hover{
+  text-decoration:none;
+  color:#fff;
+  font-weight:bold;
+}
+
+.tekstpatikewhite{
+  text-align:center;
+    color:#142236;
+}
+
+.buylink{
+  background-color:#0071E3;
+  width:30%;
+  padding:10px 20px 10px 20px;
+  margin:0px auto;
+  border-radius:10px;
+}
+.desno{
+  float:right;
+}
+
+/*up dugme*/
+.up{
+	position: fixed;
+    bottom: 30px;
+    right: 30px;
+	padding:3px 10px 5px 10px;
+	z-index: 100;
+	font-size:30px;
+	background-color: #142236;
+	border-radius:50%;
+	border:0px;
+	display:none;
+}
+button.up:focus{ 
+	outline:0px!important;
+}
+.up:hover {
+	opacity: 0.8;
+  }
+.up{
+	border:0px;
+	color:#fff;
+	
+}
+.up a:hover{
+	color:#fff;
+}
+
+/* forma */
+
+section.contact-us {
+	margin-top: 100px;
+	margin-bottom: 60px;
+}
+
+.contact-us .section-heading h2 {
+	text-align: left;
+	margin-top: 0px;
+	margin-bottom: 60px;
+	font-size: 22px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: #121212;
+}
+
+.contact-us p {
+	margin-top: -5px;
+}
+
+.contact-us em {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 15px;
+	color: #aaa;
+}
+
+.contact-us input {
+  border-radius: 3px;
+  padding-left: 15px;
+  font-size: 13px;
+  color: #4a4a4a;
+  background-color: #f4f4f4;
+  outline: none!important;
+  border: none;
+  box-shadow: none;
+  line-height: 44px;
+  height: 44px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.contact-us textarea {
+  border-radius: 3px;
+  padding-left: 15px;
+  padding-top: 10px;
+  font-size: 13px;
+  color: #4a4a4a;
+  background-color: #f4f4f4;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  height: 122px;
+  max-height: 220px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.contact-us button {
+	width: 100%;
+	display: inline-block;
+	background-color: #142236;
+	color: #fff!important;
+	font-size: 13px;
+	text-transform: uppercase;
+	font-weight: 500;
+	padding: 12px 20px;
+	border-radius: 3px;
+	text-decoration: none;
+	letter-spacing: 0.5px;
+}
+
+section.map {
+	margin-bottom: 150px;
+}
+
+section.map #map {
+	height: 450px;
+}
+
+/* author page */
+
+.tekstAutor{
+  color:gray;
+}
+.autor{
+	margin:7rem 0 7rem 0;
+}
+.naslovAutor{
+	text-align:center;
+}
+.autor img{
+	float:right;
+}
+/*futer*/
+footer{
+  background-color:#142236;
+}
+.futer{
+  display:flex;
+  justify-content: space-between;
+  padding-top:20px;
+  color:#fff;
+  font-weight:bold;
+}
+
+
+.dok a{
+  text-decoration:none;
+  color:#fff;
+  font-size:25px;
+}
+.dok a:hover{
+  color:#c2c2c2;
+  text-decoration:none;
+}
+.social a i{
+  font-size:20px;
+}
+
+/*store page*/
+#sortiranje{
+width:220px;
+ padding:10px;
+ border:1px solid rgba (216, 216, 216, 0.5);
+ font-size:20px;
+ text-align:center;
+ margin-bottom:20px;
+ outline:none;
+}
+.centriranje{
+  text-align:center;
+}
+.vidljiv{
+  display:block;
+}
+.nevidljiv{
+  display:none;
+}
+.prikazFiltera{
+ font-size:160%;
+}
+.okvir{
+ border:1px solid rgba(20, 34, 54,0.6);
+
+}
+.responsFilter{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+#products{
+ display:flex;
+justify-content:space-around;
+}
+
+.addToCart{
+width: 100%;
+text-align: center;
+padding: 10px;
+background-color: #142236;
+
+color: #fff;
+outline: 0px;
+border: none;
+padding:10px 20px 10px 20px;
+border-radius:10px;
+}
+.backpic{
+  display:none;
+}
+
+/* #products .product:hover .backpic{
+    display:block;
+}
+#products .product:hover .frontpic{
+  display:none;
+} */
+
+/* cart page */
+.cartDiv{
+  margin:250px 0px 250px 0px;
+}
+.emptyCart a{
+  text-decoration: none;
+  color:#142236;;
+}
+.emptyCart a:hover{
+  text-decoration: none;
+  color:#142236;
+}
+#orderTable img{
+  width:20%;
+}
+.tableAlign{
+
+  margin:0px auto;
+}
+
+
+/* Media query*/
+
+@media screen and (max-width:1199px){
+
+.tekstnaslov{
+  text-align:center;
+}
+.tekst{
+  text-align:center;
+}
+.picpatike{
+  text-align:center;
+}
+  
+}
+
+
+@media screen and (max-width:997px){
+	.hamb{
+		display:block;
+    margin-left:35px;
+	}
+  .hamb i{
+    float:right;
+    margin-top:15px;
+  }
+  #navigacija{
+    display:none;
+  }
+  .meniResp{
+		display:block !important;
+		padding-bottom:10px;
+    float:right;
+	}
+  
+}

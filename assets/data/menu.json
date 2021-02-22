@@ -1,0 +1,22 @@
+[
+  {
+    "href":"index.html",
+    "name":"Home"
+  },
+  {
+    "href":"store.html",
+    "name":"Store"
+  },
+  {
+    "href":"contact.html",
+    "name":"Contact"
+  },
+  {
+    "href":"author.html",
+    "name":"Author"
+  },
+  {
+    "href":"cart.html",
+    "name":"<i class='fa fa-shopping-cart'></i> <sup class='text-info font-weight-bold' id='count'>0</sup>"
+  }
+]

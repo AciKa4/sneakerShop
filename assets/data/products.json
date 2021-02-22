@@ -1,0 +1,228 @@
+[
+    {
+        "id":1,
+        "name":"NIKE AIR FORCE 1 '07",
+        "price":{
+            "new":99.95,
+            "old":120
+        },
+        "img":{
+            "src":"nike1.jpg",
+            "alt":"Nike air force",
+            "hover":"nike1back.jpg"
+        },
+        "brand":"nike"
+    },
+    {
+        "id":2,
+        "name":"ADIDAS SUPERSTAR 50",
+        "price":{
+            "new":109,
+            "old":140
+        },
+        "img":{
+            "src":"adidas1.jpg",
+            "alt":"Adidas x run dmc",
+            "hover":"adidas1back.jpg"
+        },
+        "brand":"adidas"
+    }
+    ,
+    {
+        "id":3,
+        "name":"ASICS GEL-TRABUCO 9",
+        "price":{
+            "new":139.95,
+            "old":150.50
+        },
+        "img":{
+            "src":"asics1.jpg",
+            "alt":"Asics gel-trabuco 9",
+            "hover":"asics1back.jpg"
+        },
+        "brand":"asics"
+    },
+    {
+        "id":4,
+        "name":"PUMA FUTURE RIDER ",
+        "price":{
+            "new":85,
+            "old":110
+        },
+        "img":{
+            "src":"puma1.jpg",
+            "alt":"Puma future rider",
+            "hover":"puma1back.jpg"
+        },
+        "brand":"puma"
+    },
+    {
+        "id":5,
+        "name":"ADIDAS ZX BOOST PURE",
+        "price":{
+            "new":130,
+            "old":150
+        },
+        "img":{
+            "src":"adidas2.jpg",
+            "alt":"Adidas zx 2k ",
+            "hover":"adidas2back.jpg"
+        },
+        "brand":"adidas"
+    },
+    {
+        "id":6,
+        "name":"ASICS GEL-KAYANO 14",
+        "price":{
+            "new":130,
+            "old":150
+        },
+        "img":{
+            "src":"asics2.jpg",
+            "alt":"Asics gel-kayano 14",
+            "hover":"asics2back.jpg"
+        },
+        "brand":"asics"
+    },
+    {
+        "id":7,
+        "name":"NIKE REACT ELEMENT 55",
+        "price":{
+            "new":130.5,
+            "old":160
+        },
+        "img":{
+            "src":"nike2.jpg",
+            "alt":"Nike react element 55",
+            "hover":"nike2back.jpg"
+        },
+        "brand":"nike"
+    },
+    {
+        "id":8,
+        "name":"PUMA X-RAY 2 SQUARE",
+        "price":{
+            "new":71.5,
+            "old":100
+        },
+        "img":{
+            "src":"puma2.jpg",
+            "alt":"Puma x-ray 2 square",
+            "hover":"puma2back.jpg"
+        },
+        "brand":"puma"
+    },
+    {
+        "id":9,
+        "name":"ASICS GEL-LYTE III OG",
+        "price":{
+            "new":116.5,
+            "old":135
+        },
+        "img":{
+            "src":"asics3.jpg",
+            "alt":"Asics III OG ",
+            "hover":"asics3back.jpg"
+        },
+        "brand":"asics"
+    },
+    {
+        "id":10,
+        "name":"PUMA RS-X³ NEO FADE",
+        "price":{
+            "new":98,
+            "old":120
+        },
+        "img":{
+            "src":"puma3.jpg",
+            "alt":"Puma RS-X neo fade",
+            "hover":"puma3back.jpg"
+        },
+        "brand":"puma"
+    },
+    {
+        "id":11,
+        "name":"NIKE AIR MAX TRIAX",
+        "price":{
+            "new":110,
+            "old":125
+        },
+        "img":{
+            "src":"nike3.jpg",
+            "alt":"Nike air max triax",
+            "hover":"nike3back.jpg"
+        },
+        "brand":"nike"
+    },
+    {
+        "id":12,
+        "name":"ADIDAS NMD PRIMEKNIT",
+        "price":{
+            "new":210,
+            "old":220
+        },
+        "img":{
+            "src":"adidas3.jpg",
+            "alt":"Adidas nmd r1 primeknit",
+            "hover":"adidas3back.jpg"
+        },
+        "brand":"adidas"
+    },
+    {
+        "id":13,
+        "name":"NIKE AIR MAX 270 REACT",
+        "price":{
+            "new":139.99,
+            "old":150
+        },
+        "img":{
+            "src":"nike4.jpg",
+            "alt":"Nike air max 270",
+            "hover":"nike4back.jpg"
+        },
+        "brand":"nike"
+    },
+    {
+        "id":14,
+        "name":"ADIDAS ZX 2K 4D",
+        "price":{
+            "new":152.99,
+            "old":170
+        },
+        "img":{
+            "src":"adidas4.jpg",
+            "alt":"Adidas ZX 2K 4D",
+            "hover":"adidas4back.jpg"
+        },
+        "brand":"adidas"
+    },
+    {
+        "id":15,
+        "name":"PUMA STYLE RIDER",
+        "price":{
+            "new":75.99,
+            "old":90
+        },
+        "img":{
+            "src":"puma4.jpg",
+            "alt":"Puma style rider stream on",
+            "hover":"puma4back.jpg"
+        },
+        "brand":"puma"
+    },
+    {
+        "id":16,
+        "name":"ASICS X AWAKE",
+        "price":{
+            "new":140,
+            "old":159.99
+        },
+        "img":{
+            "src":"asics4.jpg",
+            "alt":"Asics X Awake",
+            "hover":"asics4back.jpg"
+        },
+        "brand":"asics"
+    }
+]
+

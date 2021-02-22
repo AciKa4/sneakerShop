@@ -1,0 +1,37 @@
+[
+    {
+        "id":1,
+        "name":"Nike",
+        "text":"Take the high road and go higher.",
+        "description":"Adidas je nemački proizvodjač sportske opreme.Adidas je nejveći evropski proizvodjač sportske opreme.Logo ove firme predstavljaju tri paralelene crte.",
+        "img":{
+            "src":"nike.jpg",
+            "alt":"Nike"
+        }
+    },
+    {
+        "id":2,
+        "name":"Adidas",
+        "text":"Put on your adidas and step off.",
+        "description":"Adidas je nemački proizvodjač sportske opreme.Adidas je nejveći evropski proizvodjač sportske opreme.Logo ove firme predstavljaju tri paralelene crte.",
+        "img":{
+            "src":"adidas.jpg",
+            "alt":"Adidas"
+        }
+    },
+    {
+        "id":3,
+        "name":"Puma",
+        "text":"Made to shine.",
+        "description":"Adidas je nemački proizvodjač sportske opreme.Adidas je nejveći evropski proizvodjač sportske opreme.Logo ove firme predstavljaju tri paralelene crte.",
+        "img":{
+            "src":"puma.jpg",
+            "alt":"Puma"
+        }
+    }
+]
+
+
+
+
+
