@@ -6,6 +6,7 @@ $(document).ready(function(){
 let location = window.location.pathname;
 
 mobileNav();
+
 //  index stranica
 if(location.indexOf("index.html") != -1){
     skrol();
@@ -67,15 +68,11 @@ callbackajax(baseurl + "brandsIndex.json","get",function(result){
 });
 callbackajax(baseurl + "products.json","get",function(result){
     ispisProizvoda(result);
+    setItemToLS("allProducts",result);
 });
 callbackajax(baseurl + "brands.json","get",function(result){
     ispisBrendova(result);
 });
-
-
-
-
-
 
 function ispisNav(data){
     let ispis="";
@@ -89,8 +86,6 @@ function ispisNav(data){
 
 function ispisBrendovaPocetna(data){
     let ispis ="";
-    
-    products = data;
 
     for(let i=0;i<data.length;i++){
         if( i%2 == 0){
@@ -210,8 +205,8 @@ function strelicaUp(){
 
 
 function addToCart(){
+
     var id = $(this).data('id');
-    
     var products = anyInCart();
 
     if(!products){
@@ -219,21 +214,21 @@ function addToCart(){
         products[0]={
            id:id,
            quantity:1
-       };
-    localStorage.setItem("products", JSON.stringify(products));
+    };
+
+    setItemToLS("products",products);
     }
 
     else{
         if(!inLocaleStorage(products, id)) {
             addToLocaleStorage(id)
-            }
-            else {
+        }
+        else{
                 updatequantity(id);
-            }
+        }
     }
 
-         alert("Your item has been added to the cart!");       
-    
+    alert("Your item has been added to the cart!");       
 }
 
 
@@ -241,7 +236,7 @@ function addToCart(){
 //provera da li se proizvod vec nalazi u localstorage-u
 function inLocaleStorage(products, id) {
     return products.find(p => p.id == id);
-   }
+}
 
 //dodavanje proizvoda u localstorage
 function addToLocaleStorage(id) {
@@ -250,13 +245,18 @@ function addToLocaleStorage(id) {
     products.push({
     id : id,
     quantity : 1
-    })
-
-    localStorage.setItem("products", JSON.stringify(products));
+    });
+    setItemToLS("products",products);
 }
 
-
-
+//funkcija za postavljanje localstorage-a
+function setItemToLS(key,value){
+    localStorage.setItem(key,JSON.stringify(value));
+}
+//funkcija za dohvatanje localstorage-a
+function getItemFromLS(value){
+    return JSON.parse(localStorage.getItem(value));
+}
 
 // $(document).ready(function() {
 
@@ -264,7 +264,6 @@ function addToLocaleStorage(id) {
     //     $('#count').html(anyInCart().length);
 //     }
 //     });
-
 
 //povecavanje kolicine proizvoda
 function updatequantity(id){
@@ -284,48 +283,45 @@ function anyInCart(){
 
 
 
-$('#sortiranje').click(sortiraj);
+$('#sortiranje').change(sortiraj);
 
 //sortiranje  po ceni i imenu
 function sortiraj(){
     var sortType = $('#sortiranje').val();
     var filtProizvodi = [];
+    var allProducts = getItemFromLS("allProducts");
 
-    callbackajax(baseurl + "products.json","get",function(result){
         if(sortType == 'asc'){
-            filtProizvodi = result.sort((a,b) => a.price.new > b.price.new ? 1 : -1)
+            filtProizvodi = allProducts.sort((a,b) => a.price.new > b.price.new ? 1 : -1)
         }
         else if(sortType == 'desc'){
-            filtProizvodi = result.sort((a,b) => a.price.new < b.price.new ? 1 : -1)
+            filtProizvodi = allProducts.sort((a,b) => a.price.new < b.price.new ? 1 : -1)
         }
         else if(sortType == 'descbyName'){
-            filtProizvodi = result.sort((a,b) => a.name > b.name ? 1 : -1)
+            filtProizvodi = allProducts.sort((a,b) => a.name > b.name ? 1 : -1)
         }
         else{
-            filtProizvodi = result;
+            filtProizvodi = allProducts;
         }
+
         ispisProizvoda(filtProizvodi);
-    });
-}1
-
-
+}
 
 function filterChange(){
-
     let selectedBrands = [];
+    var allProducts = getItemFromLS("allProducts");
+
 	$('.brend:checked').each(function(el){
 		selectedBrands.push($(this).val());
 	});
-    
-    callbackajax(baseurl + "products.json","get",function(result){
-        if(selectedBrands.length != 0){
-            var filter = [];
-            filter = result.filter(x =>selectedBrands.includes(x.brand));	
-            ispisProizvoda(filter);
-        }
-        else
-            ispisProizvoda(result);
-    });
+
+    if(selectedBrands.length != 0){
+        var filter = [];
+        filter = allProducts.filter(x =>selectedBrands.includes(x.brand));	
+        ispisProizvoda(filter);
+    }
+    else
+        ispisProizvoda(allProducts);
 }
 
 
