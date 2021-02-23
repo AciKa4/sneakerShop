@@ -18,12 +18,11 @@ if(location.indexOf("store.html") != -1){
     filterProizvodi();
 }
 
-// //  contact stranica
-// if(location.indexOf("index.html") != -1){
-//     skrol();
-//     strelicaUp();
-//   
-// }
+//  store stranica
+if(location.indexOf("store.html") != -1){
+    $('#sortiranje').change(sortiraj);
+    $('.cena').change(sortiraj)
+}
 
 // //  author stranica
 // if(location.indexOf("index.html") != -1){
@@ -71,6 +70,8 @@ callbackajax(baseurl + "products.json","get",function(result){
 callbackajax(baseurl + "brands.json","get",function(result){
     ispisBrendova(result);
 });
+
+
 
 });
 function ispisNav(data){
@@ -277,8 +278,7 @@ function anyInCart(){
 }
 
 //sortiranje  po ceni, imenu i opsegu cene
-$('#sortiranje').change(sortiraj);
-$('.cena').change(sortiraj)
+
 
 var maxArray = [];
 var minArray = [];
