@@ -24,22 +24,13 @@ if(location.indexOf("store.html") != -1){
     $('.cena').change(sortiraj)
 }
 
-// //  author stranica
-// if(location.indexOf("index.html") != -1){
-//     skrol();
-//     strelicaUp();
-//    
-// }
  //cart stranica
 if(location.indexOf('cart.html') != -1) {
 
     let products = anyInCart();
     check(products);
-    $(".quantityInput").change(quantityChange);
 }
     
-// }
-
 function filterProizvodi(){
     $(".prikazFiltera").click(function(){
     $(this).find("i").toggleClass("fa fa-sort-down");
@@ -75,9 +66,8 @@ callbackajax(baseurl + "brands.json","get",function(result){
     ispisBrendova(result);
 });
 
-
-
 });
+
 function ispisNav(data){
     let ispis="";
     for(let obj of data){
@@ -364,6 +354,8 @@ function anyInCart(){
     return JSON.parse(localStorage.getItem("products"));
 }
 
+
+
 // ubacivanje u korpu
 function displayCart(){
     let products = getItemFromLS("products");
@@ -397,13 +389,13 @@ function displayCart(){
             <tr>
             <td><h5>${obj.name}</h5></td>
             <td>
-                <img src="assets/img/${obj.img.src}" alt="Food 2 image" class="img-fluid">
+                <img src="assets/img/${obj.img.src}" alt="${obj.img.alt}" class="img-fluid">
             </td>
             <td class="price">$${obj.price.new}</td>
             <td class="quantity">
                 <input class="form-control quantityInput" type="number" value="${obj.quantity}">
             </td>
-            <td class="productSum">${parseFloat(obj.price.new*obj.quantity)}$</td>
+            <td class="productSum">${parseFloat(obj.price.new*obj.quantity)} $</td>
             <td>
                 <button onclick ='removeItem(${obj.id})'class="btn btn-outline-danger btnRemove">Remove</button>
             </td>
@@ -426,6 +418,7 @@ function displayCart(){
     $(".cartDiv").html(ispis);
 }
 
+// ukupna cena proizvoda - cena jednog*kolicina
 function sum(data){
     let sum = 0;
 
@@ -438,14 +431,17 @@ function sum(data){
 //provera za korpu, ukoliko je prazna ispisuje poruku, ukoliko nije pravi se tabela proizvoda
 function check(productsInCart){
     if(productsInCart){
-        if(productsInCart.length)
+        if(productsInCart.length){
             displayCart();
+            $(".quantityInput").change(quantityChange);
+        }
         else
             showEmptyCart();
         
     }
     else
         showEmptyCart();
+        
 }
 
 //isprazniti korpu
@@ -456,8 +452,9 @@ function removeAll(){
 // izbrisati odredjeni proizvod iz korpe
 function removeItem(id){
         let products = anyInCart();
-        update();
+
         products = products.filter(x => x.id != id);
+
         setItemToLS("products",products);
         check(products);
 }
@@ -467,7 +464,6 @@ function buy(){
     localStorage.removeItem("products");
     showEmptyCart();
 }
-
 //prazna korpa
 function showEmptyCart() {
     $(".cartDiv").html("<div class='mx-auto d-flex w-75'><img class=' w-50 mx-auto' src='assets/img/emptycart.png' alt='Your cart is empty'></div><h1 class='py-3'>Your cart is empty</h1>")
@@ -485,7 +481,7 @@ function update(){
     for(let i=0; i< price.length; i++){
         let priceone = price[i].innerHTML.replace('$','');
 
-        productSum[i].innerHTML =Number(priceone) * Number(quantitySum[i].value);
+        productSum[i].innerHTML =  Number(priceone)*Number(quantitySum[i].value) + "$";
     
         totalSum += Number(priceone) * Number(quantitySum[i].value);  
     }

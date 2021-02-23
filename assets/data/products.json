@@ -3,7 +3,7 @@
         "id":1,
         "name":"NIKE AIR FORCE 1 '07",
         "price":{
-            "new":99.95,
+            "new":99.9,
             "old":120
         },
         "img":{
@@ -32,8 +32,8 @@
         "id":3,
         "name":"ASICS GEL-TRABUCO 9",
         "price":{
-            "new":139.95,
-            "old":150.50
+            "new":139.9,
+            "old":150.5
         },
         "img":{
             "src":"asics1.jpg",
@@ -172,7 +172,7 @@
         "id":13,
         "name":"NIKE AIR MAX 270",
         "price":{
-            "new":139.99,
+            "new":139.9,
             "old":150
         },
         "img":{
@@ -186,7 +186,7 @@
         "id":14,
         "name":"ADIDAS ZX 2K 4D",
         "price":{
-            "new":152.99,
+            "new":152.9,
             "old":170
         },
         "img":{
@@ -200,7 +200,7 @@
         "id":15,
         "name":"PUMA STYLE RIDER",
         "price":{
-            "new":75.99,
+            "new":75.9,
             "old":90
         },
         "img":{
@@ -215,7 +215,7 @@
         "name":"ASICS X AWAKE",
         "price":{
             "new":140,
-            "old":159.99
+            "old":159.9
         },
         "img":{
             "src":"asics4.jpg",
