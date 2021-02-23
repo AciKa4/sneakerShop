@@ -30,9 +30,13 @@ if(location.indexOf("store.html") != -1){
 //     strelicaUp();
 //    
 // }
-//  cart stranica
-// if(location.indexOf('cart') != -1) {
+ //cart stranica
+if(location.indexOf('cart.html') != -1) {
 
+    let products = anyInCart();
+    check(products);
+    $(".quantityInput").change(quantityChange);
+}
     
 // }
 
@@ -206,79 +210,8 @@ function strelicaUp(){
 }
 
 
-// cart funckionalnost 
-function addToCart(){
-
-    var id = $(this).data('id');
-    var products = anyInCart();
-
-    if(!products){
-        let products = [];
-        products[0]={
-           id:id,
-           quantity:1
-    };
-
-    setItemToLS("products",products);  
-    }
-
-    else{
-        if(!inLocaleStorage(products, id)) {
-            addToLocaleStorage(id)
-        }
-        else{
-            updatequantity(id);
-        }
-    }
-
-    alert("Your item has been added to the cart!");       
-}
-
-
-
-//provera da li se proizvod vec nalazi u localstorage-u
-function inLocaleStorage(products, id) {
-    return products.find(p => p.id == id);
-}
-
-//dodavanje proizvoda u localstorage
-function addToLocaleStorage(id) {
-    let products = anyInCart();
-
-    products.push({
-    id : id,
-    quantity : 1
-    });
-    setItemToLS("products",products);
-}
-
-//funkcija za postavljanje localstorage-a
-function setItemToLS(key,value){
-    localStorage.setItem(key,JSON.stringify(value));
-}
-
-//funkcija za dohvatanje localstorage-a
-function getItemFromLS(value){
-    return JSON.parse(localStorage.getItem(value));
-}
-
-//povecavanje kolicine proizvoda
-function updatequantity(id){
-    let products = anyInCart();
-    products.forEach(el => {
-        if(el.id == id)
-            el.quantity++;
-        });
-    setItemToLS("products",products);
-}
-
-//funk proverava da li je prazan localstorage za proizvode
-function anyInCart(){
-    return JSON.parse(localStorage.getItem("products"));
-}
 
 //sortiranje  po ceni, imenu i opsegu cene
-
 
 var maxArray = [];
 var minArray = [];
@@ -360,57 +293,217 @@ function sortiraj(){
     ispisProizvoda(filtProizvodi);
 }
 
-// function filterChange(){
-//     let selectedBrands = [];
-//     var allProducts = getItemFromLS("allProducts");
+// cart funckionalnost 
+function addToCart(){
 
-// 	$('.brend:checked').each(function(el){
-// 		selectedBrands.push($(this).val());
-// 	});
+    var id = $(this).data('id');
+    var products = anyInCart();
 
-//     if(selectedBrands.length != 0){
-//         var filter = [];
-//         filter = allProducts.filter(x =>selectedBrands.includes(x.brand));	
-//         ispisProizvoda(filter);
-//     }
-//     else
-//         ispisProizvoda(allProducts);
-// }
+    if(!products){
+        let products = [];
+        products[0]={
+           id:id,
+           quantity:1
+    };
 
-// $('.cena').click(filterCena)
-// function filterCena(){
-//     var pricemax = $(this).data('max');
-//     var pricemin = $(this).data('min');
-//     var allProducts = getItemFromLS("allProducts");
-//     var filter = [];
+    setItemToLS("products",products);  
+    }
 
-//     if($.inArray(pricemax,maxArray) != -1){
-//         maxArray = maxArray.filter(x => x != pricemax);
-//     }
-//     else{
-//         maxArray.push(pricemax);
-//     }
+    else{
+        if(!inLocaleStorage(products, id)) {
+            addToLocaleStorage(id)
+        }
+        else{
+            updatequantity(id);
+        }
+    }
 
-//     if($.inArray(pricemin,minArray) != -1){
-//         minArray = minArray.filter(x => x != pricemin)
-//     }
-//     else{
-//         minArray.push(pricemin);
-//     }
-//     filter = allProducts.filter(x =>{
-//         if(minArray.length !=0 && maxArray.length !=0){
-//             for(let i=0; i<minArray.length;i++){
-//                 for(let j=0; j<maxArray.length; j++){
-//                     if(x.price.new >= minArray[i] && x.price.new <= maxArray[j])
-//                         return true;
-//                 }
-//             }
-//         }
-//         else
-//             return true;
-//     });
-//    ispisProizvoda(filter);
-// }
+    alert("Your item has been added to the cart!");       
+}
+
+
+
+//provera da li se proizvod vec nalazi u localstorage-u
+function inLocaleStorage(products, id) {
+    return products.find(p => p.id == id);
+}
+
+//dodavanje proizvoda u localstorage
+function addToLocaleStorage(id) {
+    let products = anyInCart();
+
+    products.push({
+    id : id,
+    quantity : 1
+    });
+    setItemToLS("products",products);
+}
+
+//funkcija za postavljanje localstorage-a
+function setItemToLS(key,value){
+    localStorage.setItem(key,JSON.stringify(value));
+}
+
+//funkcija za dohvatanje localstorage-a
+function getItemFromLS(value){
+    return JSON.parse(localStorage.getItem(value));
+}
+
+//povecavanje kolicine proizvoda
+function updatequantity(id){
+    let products = anyInCart();
+    products.forEach(el => {
+        if(el.id == id)
+            el.quantity++;
+        });
+    setItemToLS("products",products);
+}
+
+//funk proverava da li je prazan localstorage za proizvode
+function anyInCart(){
+    return JSON.parse(localStorage.getItem("products"));
+}
+
+// ubacivanje u korpu
+function displayCart(){
+    let products = getItemFromLS("products");
+    let ispis= `
+    <div id="orderTable">
+        <table class="tableAlign">
+            <thead>
+            <tr>
+            <td>Product Name</td>
+            <td>Image</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Sum</td>
+            <td>Remove</td>
+            </tr>
+            </thead>`;
+    let allProducts = getItemFromLS("allProducts");
+
+    allProducts = allProducts.filter(el => {
+        for(let p of products){
+            if(el.id == p.id) {
+            el.quantity = p.quantity;
+             return true;
+        }
+    }
+    
+    });
+
+    for(let obj of allProducts){
+        ispis+=`<tbody>
+            <tr>
+            <td><h5>${obj.name}</h5></td>
+            <td>
+                <img src="assets/img/${obj.img.src}" alt="Food 2 image" class="img-fluid">
+            </td>
+            <td class="price">$${obj.price.new}</td>
+            <td class="quantity">
+                <input class="form-control quantityInput" type="number" value="${obj.quantity}">
+            </td>
+            <td class="productSum">${parseFloat(obj.price.new*obj.quantity)}$</td>
+            <td>
+                <button onclick ='removeItem(${obj.id})'class="btn btn-outline-danger btnRemove">Remove</button>
+            </td>
+        </tr>
+        </tbody>
+        `;
+    }
+    ispis+=` </table>
+    </div>
+
+
+   <div class="container">
+        <div class="row d-flex justify-content-end" id="controls">
+                <p id="totalSum" class="m-2">Total Sum:${sum(allProducts)}$</p>
+                <button id="purchase" onclick ="buy()" class="btn btn-info m-2">Purchase</button>
+                <button id="removeAll" onclick="removeAll()" class="btn btn-danger m-2">Remove All</button>
+        </div>
+    </div>`;
+ 
+    $(".cartDiv").html(ispis);
+}
+
+function sum(data){
+    let sum = 0;
+
+    data.forEach(el =>{
+        sum+=parseFloat(el.price.new*el.quantity);
+    })
+    return sum;
+}
+
+//provera za korpu, ukoliko je prazna ispisuje poruku, ukoliko nije pravi se tabela proizvoda
+function check(productsInCart){
+    if(productsInCart){
+        if(productsInCart.length)
+            displayCart();
+        else
+            showEmptyCart();
+        
+    }
+    else
+        showEmptyCart();
+}
+
+//isprazniti korpu
+function removeAll(){
+    localStorage.removeItem("products");
+    showEmptyCart();
+}   
+// izbrisati odredjeni proizvod iz korpe
+function removeItem(id){
+        let products = anyInCart();
+        update();
+        products = products.filter(x => x.id != id);
+        setItemToLS("products",products);
+        check(products);
+}
+// prilikom kupovine se prazni korpa i izbacuje poruka o uspesnoj kupovini proizvoda
+function buy(){
+    alert("Your order has been placed.");
+    localStorage.removeItem("products");
+    showEmptyCart();
+}
+
+//prazna korpa
+function showEmptyCart() {
+    $(".cartDiv").html("<div class='mx-auto d-flex w-75'><img class=' w-50 mx-auto' src='assets/img/emptycart.png' alt='Your cart is empty'></div><h1 class='py-3'>Your cart is empty</h1>")
+}
+   
+// ukoliko se poveca kolicina jednog proizvoda azuriramo sumu za taj proizvod kao i ukupnu cenu svih proizvoda u korpi
+function update(){
+    let productSum = document.querySelectorAll(".productSum");
+    let price = document.querySelectorAll(".price");
+    let quantitySum = document.querySelectorAll(".quantityInput");
+
+    let totalSumforAll = document.querySelector("#totalSum");
+    let totalSum = 0;
+
+    for(let i=0; i< price.length; i++){
+        let priceone = price[i].innerHTML.replace('$','');
+
+        productSum[i].innerHTML =Number(priceone) * Number(quantitySum[i].value);
+    
+        totalSum += Number(priceone) * Number(quantitySum[i].value);  
+    }
+
+    totalSumforAll.innerHTML =  "Total Sum:" + parseFloat(totalSum) + "$";
+}
+
+
+// kolicina jednog proizvoda ne moze biti negativna
+function quantityChange() {
+    if(this.value > 0 ) {
+        update();
+    } 
+    else {
+    this.value = 1;
+    }
+}
+    
 
 
 
