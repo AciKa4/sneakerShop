@@ -1,6 +1,12 @@
+@font-face{
+  font-family:'font';
+  src:url('../fonts/Ubuntu-Regular.ttf');
+}
+
 *{
   padding: 0px;
   margin: 0px;
+  font-family:'font';
 }
 #hed{
   background-color:#142236;
@@ -20,6 +26,9 @@
   text-decoration: none;
   color:#fff;
   text-transform:uppercase;
+}
+#nav li a:hover{
+  color:#000;
 }
 #banner img{  
   background-position: center; 

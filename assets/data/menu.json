@@ -17,6 +17,6 @@
   },
   {
     "href":"cart.html",
-    "name":"<i class='fa fa-shopping-cart'></i> <sup class='text-info font-weight-bold' id='count'>0</sup>"
+    "name":"<i class='fa fa-shopping-cart'></i>"
   }
 ]

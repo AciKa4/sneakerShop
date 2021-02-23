@@ -11,6 +11,7 @@ mobileNav();
 if(location.indexOf("index.html") != -1){
     skrol();
     strelicaUp();
+    
 }
  //store stranica
 if(location.indexOf("store.html") != -1){
@@ -35,9 +36,6 @@ if(location.indexOf("store.html") != -1){
 
     
 // }
-
-
-
 
 function filterProizvodi(){
     $(".prikazFiltera").click(function(){
@@ -74,6 +72,7 @@ callbackajax(baseurl + "brands.json","get",function(result){
     ispisBrendova(result);
 });
 
+});
 function ispisNav(data){
     let ispis="";
     for(let obj of data){
@@ -137,6 +136,7 @@ function ispisBrendovaPocetna(data){
 // ispis proizvoda
 function ispisProizvoda(data){
     let ispis="";
+
     if(data.length != 0){
         for(let obj of data){
             ispis+=`
@@ -154,9 +154,9 @@ function ispisProizvoda(data){
             </div>`;
         }
     }
-    else ispis=`<h2 class="h3 m-auto my-3">No items match your search!</h2>`
+    else 
     {
-
+        ispis=`<h2 class="h3 m-auto my-3">No items match your search!</h2>`
     }
     $('#products').html(ispis);
     $(".addToCart").click(addToCart);
@@ -164,8 +164,8 @@ function ispisProizvoda(data){
 }
 
 function ispisBrendova(data){
-  
     let ispis="";
+
     for(let obj of data){
         ispis+=`<input type="checkbox" name="chbBrend" value="${obj.value}" class="brend"> <lab el=""> ${obj.name}<br>`
     }
@@ -195,7 +195,8 @@ function skrol(){
         strelica.style.display="none";
         }
         });
-    }
+}
+
 function strelicaUp(){
         var strelica = document.querySelector(".up");
         strelica.addEventListener("click",function(){
@@ -205,8 +206,6 @@ function strelicaUp(){
 
 
 // cart funckionalnost 
-
-
 function addToCart(){
 
     var id = $(this).data('id');
@@ -219,7 +218,7 @@ function addToCart(){
            quantity:1
     };
 
-    setItemToLS("products",products);
+    setItemToLS("products",products);  
     }
 
     else{
@@ -227,7 +226,7 @@ function addToCart(){
             addToLocaleStorage(id)
         }
         else{
-                updatequantity(id);
+            updatequantity(id);
         }
     }
 
@@ -256,17 +255,11 @@ function addToLocaleStorage(id) {
 function setItemToLS(key,value){
     localStorage.setItem(key,JSON.stringify(value));
 }
+
 //funkcija za dohvatanje localstorage-a
 function getItemFromLS(value){
     return JSON.parse(localStorage.getItem(value));
 }
-
-// $(document).ready(function() {
-
-    // if(anyInCart()){
-    //     $('#count').html(anyInCart().length);
-//     }
-//     });
 
 //povecavanje kolicine proizvoda
 function updatequantity(id){
@@ -275,8 +268,7 @@ function updatequantity(id){
         if(el.id == id)
             el.quantity++;
         });
-
-    localStorage.setItem("products", JSON.stringify(products));
+    setItemToLS("products",products);
 }
 
 //funk proverava da li je prazan localstorage za proizvode
@@ -284,14 +276,13 @@ function anyInCart(){
     return JSON.parse(localStorage.getItem("products"));
 }
 
-
-
+//sortiranje  po ceni, imenu i opsegu cene
 $('#sortiranje').change(sortiraj);
 $('.cena').change(sortiraj)
 
+var maxArray = [];
+var minArray = [];
 
-
-//sortiranje  po ceni, imenu i opsegu cene
 function sortiraj(){
     var filtProizvodi = [];
     var allProducts = getItemFromLS("allProducts");
@@ -348,7 +339,7 @@ function sortiraj(){
         if(minArray.length !=0 && maxArray.length !=0){
             for(let i=0; i<minArray.length;i++){
                 for(let j=0; j<maxArray.length; j++){
-                    if(x.price.new >= minArray[i] && x.price.new <= maxArray[j])
+                    if(x.price.new > minArray[i] && x.price.new < maxArray[j])
                         return true;
                 }
             }
@@ -362,11 +353,9 @@ function sortiraj(){
         filtProizvodi = cenaOpseg;
     }
     
-
-    if(minArray != 0 && maxArray != 0 && selectedBrands !=0 && cenaOpseg == 0){
+    if(minArray != 0 && maxArray != 0 && selectedBrands !=0 && cenaOpseg.length == 0){
        filtProizvodi = cenaOpseg;
     }
-    
 
     ispisProizvoda(filtProizvodi);
 }
@@ -387,9 +376,6 @@ function sortiraj(){
 //     else
 //         ispisProizvoda(allProducts);
 // }
-
-var maxArray = [];
-var minArray = [];
 
 // $('.cena').click(filterCena)
 // function filterCena(){
@@ -433,7 +419,7 @@ var minArray = [];
 
 
 
-});
+
 
 
 
