@@ -137,28 +137,31 @@ function ispisBrendovaPocetna(data){
 // ispis proizvoda
 function ispisProizvoda(data){
     let ispis="";
-
-    for(let obj of data){
-        ispis+=`
-        <div class="col-5 col-md-3 mb-3 pt-2 product">
-            <img src="assets/img/${obj.img.src}" alt="${obj.img.alt}" class="img-fluid frontpic">
-            <img src="assets/img/${obj.img.hover}" alt="${obj.img.alt}" class="img-fluid backpic">
-            <p class="border-bottom pb-3">${obj.name}</p>
-            <div class="pt-2 pb-3 ">
-                <span class="red">${obj.price.new} $ </span><br>
-                <span><del>${obj.price.old} $ </del></span>
-                <div class="cart"> 
-                    <button class="addToCart buylink" href="#" data-id="${obj.id}">Add to Cart</button>
+    if(data.length != 0){
+        for(let obj of data){
+            ispis+=`
+            <div class="col-5 col-md-3 mb-3 pt-2 product">
+                <img src="assets/img/${obj.img.src}" alt="${obj.img.alt}" class="img-fluid frontpic">
+                <img src="assets/img/${obj.img.hover}" alt="${obj.img.alt}" class="img-fluid backpic">
+                <p class="border-bottom pb-3">${obj.name}</p>
+                <div class="pt-2 pb-3 ">
+                    <span class="red">${obj.price.new} $ </span><br>
+                    <span><del>${obj.price.old} $ </del></span>
+                    <div class="cart"> 
+                        <button class="addToCart buylink" href="#" data-id="${obj.id}">Add to Cart</button>
+                    </div>
                 </div>
-            </div>
-        </div>`;
+            </div>`;
+        }
+    }
+    else ispis=`<h2 class="h3 m-auto my-3">No items match your search!</h2>`
+    {
+
     }
     $('#products').html(ispis);
     $(".addToCart").click(addToCart);
    
 }
-
-
 
 function ispisBrendova(data){
   
@@ -169,7 +172,7 @@ function ispisBrendova(data){
     ispis+=`</lab></lab></lab></lab>`;
     $('.markaDva').html(ispis);
 
-    $('.brend').change(filterChange);
+    $('.brend').click(sortiraj);
 }
 
 
@@ -284,46 +287,144 @@ function anyInCart(){
 
 
 $('#sortiranje').change(sortiraj);
+$('.cena').change(sortiraj)
 
-//sortiranje  po ceni i imenu
+
+
+//sortiranje  po ceni, imenu i opsegu cene
 function sortiraj(){
-    var sortType = $('#sortiranje').val();
     var filtProizvodi = [];
     var allProducts = getItemFromLS("allProducts");
 
-        if(sortType == 'asc'){
-            filtProizvodi = allProducts.sort((a,b) => a.price.new > b.price.new ? 1 : -1)
-        }
-        else if(sortType == 'desc'){
-            filtProizvodi = allProducts.sort((a,b) => a.price.new < b.price.new ? 1 : -1)
-        }
-        else if(sortType == 'descbyName'){
-            filtProizvodi = allProducts.sort((a,b) => a.name > b.name ? 1 : -1)
-        }
-        else{
-            filtProizvodi = allProducts;
-        }
-
-        ispisProizvoda(filtProizvodi);
-}
-
-function filterChange(){
     let selectedBrands = [];
-    var allProducts = getItemFromLS("allProducts");
-
+    // po brendu
 	$('.brend:checked').each(function(el){
-		selectedBrands.push($(this).val());
+		selectedBrands.push($(this).val()); 
 	});
 
     if(selectedBrands.length != 0){
-        var filter = [];
-        filter = allProducts.filter(x =>selectedBrands.includes(x.brand));	
-        ispisProizvoda(filter);
+        filtProizvodi = allProducts.filter(x =>selectedBrands.includes(x.brand));	
     }
     else
-        ispisProizvoda(allProducts);
+        filtProizvodi = allProducts;
+
+
+    //po ceni i imenu
+    var sortType = $('#sortiranje').val();
+    if(sortType == 'asc'){
+        filtProizvodi = filtProizvodi.sort((a,b) => a.price.new > b.price.new ? 1 : -1)
+    }
+    else if(sortType == 'desc'){
+        filtProizvodi = filtProizvodi.sort((a,b) => a.price.new < b.price.new ? 1 : -1)
+    }
+    else if(sortType == 'descbyName'){
+        filtProizvodi = filtProizvodi.sort((a,b) => a.name > b.name ? 1 : -1)
+    }
+
+
+    //opseg cene 
+
+    var pricemax = $(this).data('max');
+    var pricemin = $(this).data('min');
+
+    if($.inArray(pricemax,maxArray) != -1){
+        maxArray = maxArray.filter(x => x != pricemax);
+    }
+    else{
+        maxArray.push(pricemax);
+    }
+
+    if($.inArray(pricemin,minArray) != -1){
+        minArray = minArray.filter(x => x != pricemin)
+    }
+    else{
+        minArray.push(pricemin);
+    }
+
+    var cenaOpseg  = [];
+    cenaOpseg = filtProizvodi;
+   
+    cenaOpseg = cenaOpseg.filter(x =>{
+        if(minArray.length !=0 && maxArray.length !=0){
+            for(let i=0; i<minArray.length;i++){
+                for(let j=0; j<maxArray.length; j++){
+                    if(x.price.new >= minArray[i] && x.price.new <= maxArray[j])
+                        return true;
+                }
+            }
+        }
+        else{
+            return true;
+        }
+    });
+
+    if(cenaOpseg != 0){
+        filtProizvodi = cenaOpseg;
+    }
+    
+
+    if(minArray != 0 && maxArray != 0 && selectedBrands !=0 && cenaOpseg == 0){
+       filtProizvodi = cenaOpseg;
+    }
+    
+
+    ispisProizvoda(filtProizvodi);
 }
 
+// function filterChange(){
+//     let selectedBrands = [];
+//     var allProducts = getItemFromLS("allProducts");
+
+// 	$('.brend:checked').each(function(el){
+// 		selectedBrands.push($(this).val());
+// 	});
+
+//     if(selectedBrands.length != 0){
+//         var filter = [];
+//         filter = allProducts.filter(x =>selectedBrands.includes(x.brand));	
+//         ispisProizvoda(filter);
+//     }
+//     else
+//         ispisProizvoda(allProducts);
+// }
+
+var maxArray = [];
+var minArray = [];
+
+// $('.cena').click(filterCena)
+// function filterCena(){
+//     var pricemax = $(this).data('max');
+//     var pricemin = $(this).data('min');
+//     var allProducts = getItemFromLS("allProducts");
+//     var filter = [];
+
+//     if($.inArray(pricemax,maxArray) != -1){
+//         maxArray = maxArray.filter(x => x != pricemax);
+//     }
+//     else{
+//         maxArray.push(pricemax);
+//     }
+
+//     if($.inArray(pricemin,minArray) != -1){
+//         minArray = minArray.filter(x => x != pricemin)
+//     }
+//     else{
+//         minArray.push(pricemin);
+//     }
+//     filter = allProducts.filter(x =>{
+//         if(minArray.length !=0 && maxArray.length !=0){
+//             for(let i=0; i<minArray.length;i++){
+//                 for(let j=0; j<maxArray.length; j++){
+//                     if(x.price.new >= minArray[i] && x.price.new <= maxArray[j])
+//                         return true;
+//                 }
+//             }
+//         }
+//         else
+//             return true;
+//     });
+//    ispisProizvoda(filter);
+// }
 
 
 
