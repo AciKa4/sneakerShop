@@ -31,6 +31,11 @@ if(location.indexOf('cart.html') != -1) {
     check(products);
 }
     
+if(location.indexOf('contact.html'!= -1)){
+
+    $('#form-submit').click(regButton);
+}
+
 function filterProizvodi(){
     $(".prikazFiltera").click(function(){
     $(this).find("i").toggleClass("fa fa-sort-down");
@@ -95,7 +100,7 @@ function ispisBrendovaPocetna(data){
                   <h2>${data[i].text}</h2>
                   <p>${data[i].description}</p>
                   <div class="buylink">
-                    <a href="#">Buy now</a>
+                    <a href="store.html">Buy now</a>
                   </div>
                 </div>
               </div>
@@ -113,7 +118,7 @@ function ispisBrendovaPocetna(data){
                     <h2>${data[i].text}</h2>
                     <p>${data[i].description}</p>
                     <div class="buylink">
-                        <a href="#">Buy now</a>
+                        <a href="store.html">Buy now</a>
                     </div>
                 </div>
                 <div class="col-xl-7 col-md-12 picpatike">
@@ -199,7 +204,7 @@ function strelicaUp(){
         });
 }
 
-//sortiranje  po ceni, imenu i opsegu cene
+//sortiranje  po ceni, firstnamenu i opsegu cene
 var maxArray = [];
 var minArray = [];
 
@@ -220,7 +225,7 @@ function sortiraj(){
         filtProizvodi = allProducts;
 
 
-    //po ceni i imenu
+    //po ceni i firstnamenu
     var sortType = $('#sortiranje').val();
     if(sortType == 'asc'){
         filtProizvodi = filtProizvodi.sort((a,b) => a.price.new > b.price.new ? 1 : -1)
@@ -484,9 +489,8 @@ function update(){
     totalSumforAll.innerHTML =  "Total Sum:" + parseFloat(totalSumForOne) + "$";
 }
 
-
 // kolicina jednog proizvoda ne moze biti negativna i  poziva se funkcija update() koja menja cene, ukupnu i za proizvod.
-function quantityChange() {
+function quantityChange(){
     if(this.value > 0 ) {
         update();
     } 
@@ -496,10 +500,145 @@ function quantityChange() {
 }
     
 
+// regularni izrazi
+function regButton(){
+var email = $("#email");
+var firstname = $("#firstname");
+var lastname = $("#lastname");
+var tel = $("#phone");
+var valid = $("#forma");
+var br = 0;
+
+var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+var telefonRegex = /^\d{8,13}$/;
+var nameRegex =  /^[A-ZČĆŽŠĐ][a-zčćžš]{2,15}$/
+
+// telefon
+    
+
+    if(tel.val() == ''){
+        tel.css({
+        'border':'1px solid  #e60000'
+        });
+        tel.val("");
+        tel.attr('placeholder','Phone  can not be empty');
+    }
+    else if(!telefonRegex.test(tel.val())){
+        tel.css({
+        'border':'1px solid  #e60000'
+        });
+        tel.val("");
+        tel.attr('placeholder','Please provide number between 8 and 13 digits');
+    }
+    else {
+        tel.css({
+        'border':'1px solid  #fff'
+    });
+    }
+    //za text polje
+    var tekstPolje =$("#message");
+    var tekstValid = 0;
+
+    if(tekstPolje.val() == ''){
+        tekstPolje.css({
+        'border':'1px solid  #e60000'
+        });
+        tekstPolje.val("");
+        tekstPolje.attr('placeholder','You can not send empty message');
+        tekstValid = 0;
+    }
+    else {
+        tekstPolje.css({
+        'border':'1px solid  #fff'
+        });
+        tekstValid = 1;
+    }
+
+    //za email 
+    if(email.val() == ''){
+        email.css({
+        'border':'1px solid  #e60000'
+        });
+        email.val("");
+        email.attr('placeholder','Email adress can not be empty');
+    }
+    else if(!emailRegex.test(email.val())){
+        email.css({
+        'border':'1px solid  #e60000'
+        });
+        email.val("");
+        email.attr('placeholder','e.g. aleksandar14@gmail.com');
+    }
+    else {
+        email.css({
+        'border':'1px solid  #fff'
+        });
+        br++
+    }
+    //firstname 
+    if(firstname.val() == ''){
+        firstname.css({
+        'border':'1px solid  #e60000'
+        });
+        firstname.val("");
+        firstname.attr('placeholder','First name can not be empty');
+    }
+
+    else if(!nameRegex.test(firstname.val())){
+        firstname.css({
+        'border':'1px solid  #e60000'
+        });
+        firstname.val("");
+        firstname.attr('placeholder','Please provide a valid first name, must be between 2-12 characters');
+    }
+    else {
+    firstname.css({
+        'border':'1px solid  #fff'
+        });
+        br++;
+    }
 
 
+    //lastname 
+    if(lastname.val() == ''){
+        lastname.css({
+        'border':'1px solid  #e60000'
+        });
+        lastname.val("");
+        lastname.attr('placeholder','Last name can not be empty');
+    }
 
+    else if(!nameRegex.test(lastname.val())){
+        lastname.css({
+        'border':'1px solid  #e60000'
+        });
+        lastname.val("");
+        lastname.attr('placeholder','Please provide a valid last name, must be between 2-12 characters');
+    }
+    else {
+        lastname.css({
+        'border':'1px solid  #fff'
+        });
+        br++;
+    }
 
+ // Ukoliko nema gresaka, ispisuje poruku da je uspesno poslata poruka
+    if(nameRegex.test(firstname.val()) && telefonRegex.test(tel.val()) && emailRegex.test(email.val()) && tekstValid == 1){
+        valid.show();
+        firstname.val("");
+        firstname.attr('placeholder','Full name');
+        email.val("");
+        email.attr('placeholder','Email');
+        tekstPolje.val("");
+        tekstPolje.attr('placeholder','Your message..');
+        tel.val("");
+        tel.attr('placeholder','Your phone number');
+    }
+    else{
+        valid.hide();
+    }
+
+}
 
 
 

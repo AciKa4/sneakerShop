@@ -368,6 +368,17 @@ border-radius:10px;
   margin:0px auto;
 }
 
+/* regex */
+
+.notValid{
+  color:#b90f0f;
+  display:none;
+}
+#forma{
+	color: #006622;
+	font-weight:bold;
+	display:none;
+}
 
 /* Media query*/
 
