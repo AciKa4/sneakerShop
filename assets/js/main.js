@@ -439,7 +439,7 @@ function check(productsInCart){
         showEmptyCart();
         
 }
-
+//
 //isprazniti korpu
 function removeAll(){
     localStorage.removeItem("products");
