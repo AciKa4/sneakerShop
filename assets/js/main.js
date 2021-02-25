@@ -199,10 +199,7 @@ function strelicaUp(){
         });
 }
 
-
-
 //sortiranje  po ceni, imenu i opsegu cene
-
 var maxArray = [];
 var minArray = [];
 
@@ -236,8 +233,7 @@ function sortiraj(){
     }
 
 
-    //opseg cene 
-
+    //po opseg cene 
     var pricemax = $(this).data('max');
     var pricemin = $(this).data('min');
 
@@ -469,28 +465,27 @@ function showEmptyCart() {
     $(".cartDiv").html("<div class='mx-auto d-flex w-75'><img class=' w-50 mx-auto' src='assets/img/emptycart.png' alt='Your cart is empty'></div><h1 class='py-3'>Your cart is empty</h1>")
 }
    
-// ukoliko se poveca kolicina jednog proizvoda azuriramo sumu za taj proizvod kao i ukupnu cenu svih proizvoda u korpi
+// ukoliko se poveca/smanji kolicina jednog proizvoda azuriramo cenu za taj proizvod kao i ukupnu cenu svih proizvoda u korpi.
 function update(){
     let productSum = document.querySelectorAll(".productSum");
     let price = document.querySelectorAll(".price");
     let quantitySum = document.querySelectorAll(".quantityInput");
-
     let totalSumforAll = document.querySelector("#totalSum");
-    let totalSum = 0;
+    let totalSumForOne = 0;
 
     for(let i=0; i< price.length; i++){
         let priceone = price[i].innerHTML.replace('$','');
 
         productSum[i].innerHTML =  Number(priceone)*Number(quantitySum[i].value) + "$";
     
-        totalSum += Number(priceone) * Number(quantitySum[i].value);  
+        totalSumForOne += Number(priceone) * Number(quantitySum[i].value);  
     }
 
-    totalSumforAll.innerHTML =  "Total Sum:" + parseFloat(totalSum) + "$";
+    totalSumforAll.innerHTML =  "Total Sum:" + parseFloat(totalSumForOne) + "$";
 }
 
 
-// kolicina jednog proizvoda ne moze biti negativna
+// kolicina jednog proizvoda ne moze biti negativna i  poziva se funkcija update() koja menja cene, ukupnu i za proizvod.
 function quantityChange() {
     if(this.value > 0 ) {
         update();
