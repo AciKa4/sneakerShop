@@ -623,10 +623,12 @@ var nameRegex =  /^[A-ZČĆŽŠĐ][a-zčćžš]{2,15}$/
     }
 
  // Ukoliko nema gresaka, ispisuje poruku da je uspesno poslata poruka
-    if(nameRegex.test(firstname.val()) && telefonRegex.test(tel.val()) && emailRegex.test(email.val()) && tekstValid == 1){
+    if(br != 0 && tekstValid == 1){
         valid.show();
         firstname.val("");
         firstname.attr('placeholder','Full name');
+        lastname.val("");
+        lastname.attr('placeholder','Full name');
         email.val("");
         email.attr('placeholder','Email');
         tekstPolje.val("");
