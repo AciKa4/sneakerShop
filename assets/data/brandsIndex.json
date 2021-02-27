@@ -3,7 +3,7 @@
         "id":1,
         "name":"Nike",
         "text":"Take the high road and go higher.",
-        "description":"Adidas je nemački proizvodjač sportske opreme.Adidas je nejveći evropski proizvodjač sportske opreme.Logo ove firme predstavljaju tri paralelene crte.",
+        "description":"Nike, Inc. is an American multinational corporation which is the world's largest supplier and manufacturer of athletic shoes, apparel and other sports equipment.",
         "img":{
             "src":"nike.jpg",
             "alt":"Nike"
@@ -13,7 +13,7 @@
         "id":2,
         "name":"Adidas",
         "text":"Put on your adidas and step off.",
-        "description":"Adidas je nemački proizvodjač sportske opreme.Adidas je nejveći evropski proizvodjač sportske opreme.Logo ove firme predstavljaju tri paralelene crte.",
+        "description":"Adidas is a German manufacturer of sports equipment. Adidas is a small European manufacturer of sports equipment. The logo of this company represents three parallel lines.",
         "img":{
             "src":"adidas.jpg",
             "alt":"Adidas"
@@ -23,7 +23,7 @@
         "id":3,
         "name":"Puma",
         "text":"Made to shine.",
-        "description":"Adidas je nemački proizvodjač sportske opreme.Adidas je nejveći evropski proizvodjač sportske opreme.Logo ove firme predstavljaju tri paralelene crte.",
+        "description":"PUMA has relentlessly pushed sport and culture forward by creating fast products for the world's fastest athletes. For more than 70 years, we draw strength and credibility from our heritage in sports.",
         "img":{
             "src":"puma.jpg",
             "alt":"Puma"
