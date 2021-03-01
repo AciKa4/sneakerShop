@@ -481,12 +481,12 @@ function update(){
     for(let i=0; i< price.length; i++){
         let priceone = price[i].innerHTML.replace('$','');
 
-        productSum[i].innerHTML =  Number(priceone)*Number(quantitySum[i].value) + "$";
+        productSum[i].innerHTML =  (Number(priceone)*Number(quantitySum[i].value)).toFixed(2) + "$";
     
         totalSumForOne += Number(priceone) * Number(quantitySum[i].value);  
     }
 
-    totalSumforAll.innerHTML =  "Total Sum:" + parseFloat(totalSumForOne) + "$";
+    totalSumforAll.innerHTML =  "Total Sum:" + parseFloat(totalSumForOne).toFixed(2) + "$";
 }
 
 // kolicina jednog proizvoda ne moze biti negativna i  poziva se funkcija update() koja menja cene, ukupnu i za proizvod.
@@ -621,9 +621,30 @@ var nameRegex =  /^[A-ZČĆŽŠĐ][a-zčćžš]{2,15}$/
         });
         br++;
     }
-
  // Ukoliko nema gresaka, ispisuje poruku da je uspesno poslata poruka
     if(br != 0 && tekstValid == 1){
+        var message = getItemFromLS("message");
+        if(!message){
+            let message = [];
+            message[0] = {
+                name : firstname.val()+' ' + lastname.val(),
+                email : email.val(),
+                mess : tekstPolje.val(),
+                phone : tel.val()
+            }
+            setItemToLS("message",message);
+        }
+        else{
+            message = getItemFromLS("message");
+            message.push({
+                name : firstname.val()+' ' + lastname.val(),
+                email : email.val(),
+                mess : tekstPolje.val(),
+                phone : tel.val()
+            });
+            setItemToLS("message",message);
+        }
+
         valid.show();
         firstname.val("");
         firstname.attr('placeholder','Full name');
@@ -635,6 +656,8 @@ var nameRegex =  /^[A-ZČĆŽŠĐ][a-zčćžš]{2,15}$/
         tekstPolje.attr('placeholder','Your message..');
         tel.val("");
         tel.attr('placeholder','Your phone number');
+
+       
     }
     else{
         valid.hide();
