@@ -301,8 +301,8 @@ function addToCart(){
     }
 
     else{
-        if(!inLocaleStorage(products, id)) {
-            addToLocaleStorage(id)
+        if(!inLocalStorage(products, id)) {
+            addToLocalStorage(id)
         }
         else{
             updatequantity(id);
@@ -313,14 +313,18 @@ function addToCart(){
 }
 
 
+//funk proverava da li je prazan localstorage za proizvode
+function anyInCart(){
+    return JSON.parse(localStorage.getItem("products"));
+}
 
 //provera da li se proizvod vec nalazi u localstorage-u
-function inLocaleStorage(products, id) {
+function inLocalStorage(products, id) {
     return products.find(p => p.id == id);
 }
 
 //dodavanje proizvoda u localstorage
-function addToLocaleStorage(id) {
+function addToLocalStorage(id) {
     let products = anyInCart();
 
     products.push({
@@ -350,16 +354,9 @@ function updatequantity(id){
     setItemToLS("products",products);
 }
 
-//funk proverava da li je prazan localstorage za proizvode
-function anyInCart(){
-    return JSON.parse(localStorage.getItem("products"));
-}
-
-
-
 // ubacivanje u korpu
 function displayCart(){
-    let products = getItemFromLS("products");
+    
     let ispis= `
     <div id="orderTable">
         <table class="tableAlign">
@@ -373,7 +370,9 @@ function displayCart(){
             <td>Remove</td>
             </tr>
             </thead>`;
+
     let allProducts = getItemFromLS("allProducts");
+    let products = getItemFromLS("products");
 
     allProducts = allProducts.filter(el => {
         for(let p of products){
@@ -382,7 +381,6 @@ function displayCart(){
              return true;
         }
     }
-    
     });
 
     for(let obj of allProducts){
@@ -441,10 +439,9 @@ function check(productsInCart){
         
     }
     else
-        showEmptyCart();
-        
+        showEmptyCart();  
 }
-//
+
 //isprazniti korpu
 function removeAll(){
     localStorage.removeItem("products");
@@ -470,7 +467,7 @@ function showEmptyCart() {
     $(".cartDiv").html("<div class='mx-auto d-flex w-75'><img class=' w-50 mx-auto' src='assets/img/emptycart.png' alt='Your cart is empty'></div><h1 class='py-3'>Your cart is empty</h1>")
 }
    
-// ukoliko se poveca/smanji kolicina jednog proizvoda azuriramo cenu za taj proizvod kao i ukupnu cenu svih proizvoda u korpi.
+// ukoliko se poveca/smanji kolicina jednog proizvoda azurira se cena za taj proizvod kao i ukupna cena svih proizvoda u korpi.
 function update(){
     let productSum = document.querySelectorAll(".productSum");
     let price = document.querySelectorAll(".price");
@@ -621,7 +618,7 @@ var nameRegex =  /^[A-ZČĆŽŠĐ][a-zčćžš]{2,15}$/
         });
         br++;
     }
- // Ukoliko nema gresaka, ispisuje poruku da je uspesno poslata poruka
+ // Ukoliko nema gresaka, ispisuje poruku da je uspesno poslata poruka i poruka se upisuje u local storage
     if(br != 0 && tekstValid == 1){
         var message = getItemFromLS("message");
         if(!message){

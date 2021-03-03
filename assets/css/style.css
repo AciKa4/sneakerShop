@@ -368,6 +368,10 @@ border-radius:10px;
   margin:0px auto;
 }
 
+.profile{
+  display:block;
+  margin-left:50px;
+}
 /* regex */
 
 .notValid{
@@ -396,6 +400,14 @@ border-radius:10px;
   
 }
 
+@media screen and (max-width:776px){
+  .profile {
+    text-align:center;
+    background-color: green;
+    margin: 0px auto;
+  }
+ 
+}
 
 @media screen and (max-width:997px){
 	.hamb{
